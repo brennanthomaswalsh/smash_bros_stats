@@ -1,11 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import pikachu from './images/pikachu.jpg'
+import pikachuStock from './images/pikachu_stock.jpg'
+import CharacterCard from "./components/CharacterCard"
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <CharacterCard headshotSrc={pikachu} characterName="Pikachu" stockSrc={pikachuStock} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
