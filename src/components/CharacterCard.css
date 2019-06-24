@@ -4,6 +4,7 @@
   color: black;
   border: 10px solid #DEB887;
   border-radius: 10px;
+  display: flex;
 }
 
 .character-head {
@@ -13,4 +14,8 @@
 .stocks img {
   width: 40px;
   margin: 5px;
+}
+
+.character-name {
+  margin: 0;
 }

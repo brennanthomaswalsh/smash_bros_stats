@@ -9,6 +9,7 @@ class CharacterCard extends Component {
       stocks: [1, 1, 1, 1]
     }
     this.removeStock = this.removeStock.bind(this);
+    this.resetStock = this.resetStock.bind(this);
   }
 
   removeStock = () => {
@@ -20,6 +21,10 @@ class CharacterCard extends Component {
     })
   }
 
+  resetStock = () => {
+    this.setState({stocks: [1, 1, 1, 1]})
+  }
+
   render() {
     const stocks = this.state.stocks.map(() =>
       { return (<CharacterHeadshot src={this.props.stockSrc}/> )}
@@ -27,7 +32,7 @@ class CharacterCard extends Component {
     const stocksRemaining = this.state.stocks.length
     let deceased;
 
-    if(stocksRemaining == 0){
+    if(stocksRemaining === 0){
       deceased = <div className="Deceased">Deceased</div>
     }
     else {
@@ -38,12 +43,13 @@ class CharacterCard extends Component {
       <div className="character-card">
         <div className="character-head">
           <CharacterHeadshot src={this.props.headshotSrc}/>
-          <h2>{this.props.characterName}</h2>
+          <h2 className="character-name">{this.props.characterName}</h2>
         </div>
         <div className="stocks">
           <p>Stocks Remaining:</p>
           <div onClick={this.removeStock}> { stocks }</div>
           {deceased}
+          <div onClick={this.resetStock}>RESET</div>
         </div>
       </div>
     );
