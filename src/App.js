@@ -4,11 +4,13 @@ import './App.css';
 import pikachu from './images/pikachu.jpg'
 import pikachuStock from './images/pikachu_stock.jpg'
 import CharacterCard from "./components/CharacterCard"
+import CardList from './components/CardList'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <CardList cards={[{headshotSrc: pikachu, characterName: "Pikachu", stockSrc: pikachuStock}]} />
         <CharacterCard headshotSrc={pikachu} characterName="Pikachu" stockSrc={pikachuStock} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
