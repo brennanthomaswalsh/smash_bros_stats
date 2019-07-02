@@ -1,42 +1,23 @@
 import React, { Component } from 'react';
 import './CharacterCard.css'
 import CharacterHeadshot from "./CharacterHeadshot"
+import { times } from "lodash"
 
 class CharacterCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      stocks: [1, 1, 1, 1]
-    }
-    this.removeStock = this.removeStock.bind(this);
-    this.resetStock = this.resetStock.bind(this);
-  }
-
-  removeStock = () => {
-    var array = [...this.state.stocks];
-    array.splice(0, 1);
-    console.log(array)
-    this.setState({
-      stocks: array
-    })
-  }
-
-  resetStock = () => {
-    this.setState({stocks: [1, 1, 1, 1]})
   }
 
   render() {
-    const stocks = this.state.stocks.map(() =>
-      { return (<CharacterHeadshot src={this.props.stockSrc}/> )}
+    const stocks = []
+    times(this.props.stockCount, () =>
+      stocks.push(<CharacterHeadshot src={this.props.stockSrc}/>)
     )
-    const stocksRemaining = this.state.stocks.length
+    const stocksRemaining = stocks.length
     let deceased;
 
     if(stocksRemaining === 0){
       deceased = <div className="Deceased">Deceased</div>
-    }
-    else {
-      deceased = <div></div>
     }
 
     return (
@@ -47,9 +28,9 @@ class CharacterCard extends Component {
         </div>
         <div className="stocks">
           <p>Stocks Remaining:</p>
-          <div onClick={this.removeStock}> { stocks }</div>
+          <div onClick={this.props.removeStock}> { stocks }</div>
           {deceased}
-          <div onClick={this.resetStock}>RESET</div>
+          <div onClick={this.props.resetStock}>RESET</div>
         </div>
       </div>
     );

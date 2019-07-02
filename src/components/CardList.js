@@ -8,8 +8,12 @@ class CardList extends Component {
   }
 
   render() {
-    const stocks = this.props.cards.map((elem) =>
-      { return (<CharacterCard headshotSrc={elem.headshotSrc} characterName={elem.characterName} stockSrc={elem.stockSrc} /> )}
+    const stocks = this.props.cards.map((elem, i) =>
+      {
+        const removeStock = () =>
+          this.props.removeStock(i)
+        return (<CharacterCard headshotSrc={elem.headshotSrc} characterName={elem.characterName} stockSrc={elem.stockSrc} stockCount={elem.stockCount} removeStock={removeStock}/> )
+      }
     )
     return (
       <React.Fragment>
