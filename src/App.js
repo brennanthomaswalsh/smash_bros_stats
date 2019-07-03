@@ -1,10 +1,10 @@
-import React, { Component }from 'react';
-import logo from './logo.svg';
+import React, { Component, useState }from 'react';
 import './App.css';
 import pikachu from './images/pikachu.jpg'
 import pikachuStock from './images/pikachu_stock.jpg'
-import CharacterCard from "./components/CharacterCard"
 import CardList from './components/CardList'
+import produce from 'immer'
+import { setGameState, getGamesState } from './GameStateStorage'
 
 const characterArray = [
   {headshotSrc: pikachu, characterName: "Pikachu", stockSrc: pikachuStock, stockCount: 4},
@@ -21,34 +21,55 @@ const characterArray = [
   {headshotSrc: pikachu, characterName: "Pikachu", stockSrc: pikachuStock, stockCount: 4}
   ]
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      characters: characterArray
-    }
+function App () {
+  const [playerArray, setPlayerState] = useState(getGamesState() || [characterArray, characterArray]);
+
+  const setPlayerArrayState = (gameState) => {
+    setPlayerState(gameState)
+    setGameState(gameState)
   }
 
-  removeStock = (index) => {
-    const characters = [...this.state.characters]
-    const chara = {...characters[index]}
-    chara.stockCount = chara.stockCount - 1
-    characters[index] = chara
-    this.setState({characters})
+  const removeStock = (characterIndex, playerIndex) => {
+    setPlayerArrayState(produce(playerArray, (draftPlayerArray) => {
+      const chara = draftPlayerArray[playerIndex][characterIndex]
+      chara.stockCount = chara.stockCount - 1
+    }))
   }
 
-  resetStock = () => {
-    this.setState({stocks: [1, 1, 1, 1]})
+  const resetStock = (characterIndex, playerIndex) => {
+    setPlayerArrayState(produce(playerArray, (draftPlayerArray) => {
+      const chara = draftPlayerArray[playerIndex][characterIndex]
+      chara.stockCount = 4
+    }))
   }
 
-  render() {
-    return (
-      <div className="App">
-        <CardList cards={this.state.characters} removeStock={this.removeStock} />
-        <CardList cards={this.state.characters} removeStock={this.removeStock} />
+  const resetGameState = () => {
+    setPlayerArrayState([characterArray, characterArray])
+  }
+
+  return (
+    <div className="App">
+      <button className='resetButton' onClick={resetGameState}>
+        RESTART GAME!
+      </button>
+      <div className="player player-one">
+        <CardList
+          cards={playerArray[0]}
+          removeStock={removeStock}
+          resetStock={resetStock}
+          playerNumber={0}
+        />
       </div>
-    );
-  }
+      <div className="player player-two">
+        <CardList
+          cards={playerArray[1]}
+          removeStock={removeStock}
+          resetStock={resetStock}
+          playerNumber={1}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default App;

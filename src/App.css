@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+.player {
+  width: 40%;
+}
+
+.player-one {
+  float: left;
+}
+
+.player-two {
+  float: right;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
