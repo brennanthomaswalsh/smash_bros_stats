@@ -19,7 +19,6 @@ function CharacterCard ({stockCount, headshotSrc, characterName, removeCharacter
     <div className="character-card">
       <div className="character-head">
         <CharacterHeadshot src={headshotSrc}/>
-        <h2 className="character-name">{characterName}</h2>
       </div>
       <div className="stocks">
         <p>Stocks Remaining:</p>
