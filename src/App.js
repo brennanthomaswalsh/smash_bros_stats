@@ -29,18 +29,18 @@ import produce from 'immer'
 import { setGameState, getGamesState } from './GameStateStorage'
 
 const characterArray = [
-  {headshotSrc: pikachuHeadshot, stockSrc: pikachuStock, stockCount: 4},
-  {headshotSrc: luigiHeadshot, stockSrc: luigiStock, stockCount: 4},
-  {headshotSrc: marioHeadshot, stockSrc: marioStock, stockCount: 4},
-  {headshotSrc: dkHeadshot, stockSrc: dkStock, stockCount: 4},
-  {headshotSrc: jigglypuffHeadshot, stockSrc: jigglypuffStock, stockCount: 4},
-  {headshotSrc: linkHeadshot, stockSrc: linkStock, stockCount: 4},
-  {headshotSrc: samusHeadshot, stockSrc: samusStock, stockCount: 4},
-  {headshotSrc: falconHeadshot, stockSrc: falconStock, stockCount: 4},
-  {headshotSrc: nessHeadshot, stockSrc: nessStock, stockCount: 4},
-  {headshotSrc: yoshiHeadshot, stockSrc: yoshiStock, stockCount: 4},
-  {headshotSrc: kirbyHeadshot, stockSrc: kirbyStock, stockCount: 4},
-  {headshotSrc: foxHeadshot, stockSrc: foxStock, stockCount: 4}
+  {headshotSrc: pikachuHeadshot, stockSrc: pikachuStock, stockCount: 4, nextChara: 1},
+  {headshotSrc: luigiHeadshot, stockSrc: luigiStock, stockCount: 4, nextChara: 2},
+  {headshotSrc: marioHeadshot, stockSrc: marioStock, stockCount: 4, nextChara: 3},
+  {headshotSrc: dkHeadshot, stockSrc: dkStock, stockCount: 4, nextChara: 4},
+  {headshotSrc: jigglypuffHeadshot, stockSrc: jigglypuffStock, stockCount: 4, nextChara: 5},
+  {headshotSrc: linkHeadshot, stockSrc: linkStock, stockCount: 4, nextChara: 6},
+  {headshotSrc: samusHeadshot, stockSrc: samusStock, stockCount: 4, nextChara: 7},
+  {headshotSrc: falconHeadshot, stockSrc: falconStock, stockCount: 4, nextChara: 8},
+  {headshotSrc: nessHeadshot, stockSrc: nessStock, stockCount: 4, nextChara: 9},
+  {headshotSrc: yoshiHeadshot, stockSrc: yoshiStock, stockCount: 4, nextChara: 10},
+  {headshotSrc: kirbyHeadshot, stockSrc: kirbyStock, stockCount: 4, nextChara: 11},
+  {headshotSrc: foxHeadshot, stockSrc: foxStock, stockCount: 4, nextChara: 0}
   ]
 
 function App () {
@@ -65,6 +65,14 @@ function App () {
     }))
   }
 
+  const switchCa = (characterIndex, playerIndex) => {
+    setPlayerArrayState(produce(playerArray, (draftPlayerArray) => {
+      const charaPointer = draftPlayerArray[playerIndex][characterIndex]['nextChara']
+      const nextChara = characterArray[charaPointer]
+      draftPlayerArray[playerIndex][characterIndex] = nextChara
+    }))
+  }
+
   const resetGameState = () => {
     setPlayerArrayState([characterArray, characterArray])
   }
@@ -79,6 +87,7 @@ function App () {
           cards={playerArray[0]}
           removeStock={removeStock}
           resetStock={resetStock}
+          switchCa={switchCa}
           playerNumber={0}
         />
       </div>
@@ -87,6 +96,7 @@ function App () {
           cards={playerArray[1]}
           removeStock={removeStock}
           resetStock={resetStock}
+          switchCa={switchCa}
           playerNumber={1}
         />
       </div>

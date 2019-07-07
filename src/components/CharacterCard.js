@@ -3,7 +3,7 @@ import './CharacterCard.css'
 import CharacterHeadshot from "./CharacterHeadshot"
 import { times } from "lodash"
 
-function CharacterCard ({stockCount, headshotSrc, characterName, removeCharacterStock, resetCharacterStock, stockSrc}) {
+function CharacterCard ({stockCount, headshotSrc, characterName, removeCharacterStock, resetCharacterStock, stockSrc, switchCharacter}) {
   const stocks = []
   times(stockCount, () =>
     stocks.push(<CharacterHeadshot src={stockSrc}/>)
@@ -25,6 +25,9 @@ function CharacterCard ({stockCount, headshotSrc, characterName, removeCharacter
         <div onClick={removeCharacterStock}> { stocks }</div>
         {deceased}
         <div onClick={resetCharacterStock}>RESET</div>
+      </div>
+      <div className="character-switch" onClick={switchCharacter}>
+        <p>Switch Character</p>
       </div>
     </div>
   );
