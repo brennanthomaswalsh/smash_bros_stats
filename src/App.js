@@ -82,23 +82,28 @@ function App () {
       <button className='resetButton' onClick={resetGameState}>
         RESTART GAME!
       </button>
-      <div className="player player-one">
-        <CardList
-          cards={playerArray[0]}
-          removeStock={removeStock}
-          resetStock={resetStock}
-          switchCa={switchCa}
-          playerNumber={0}
-        />
-      </div>
-      <div className="player player-two">
-        <CardList
-          cards={playerArray[1]}
-          removeStock={removeStock}
-          resetStock={resetStock}
-          switchCa={switchCa}
-          playerNumber={1}
-        />
+      <div className="playerColumn">
+        <div className="flex-break"></div>
+        <div className="player player-one">
+          <CardList
+            cards={playerArray[0]}
+            removeStock={removeStock}
+            resetStock={resetStock}
+            switchCa={switchCa}
+            playerNumber={0}
+          />
+        </div>
+        <div className="flex-break"></div>
+        <div className="player player-two">
+          <CardList
+            cards={playerArray[1]}
+            removeStock={removeStock}
+            resetStock={resetStock}
+            switchCa={switchCa}
+            playerNumber={1}
+          />
+        </div>
+        <div className="flex-break"></div>
       </div>
     </div>
   );

@@ -2,21 +2,22 @@
 .character-card {
   background: #FFDEAD;
   color: black;
-  border: 10px solid #DEB887;
-  border-radius: 10px;
+  border: 0.625rem solid #DEB887;
+  border-radius: 0.625rem;
   display: flex;
-  width: 50%;
-}
-
-.character-head {
-  float: left;
+  flex-direction: column;
+  width: 100%;
 }
 
 .stocks img {
-  width: 15px;
-  margin: 5px;
+  width: 0.9375rem;
+  margin: 0.3125rem;
 }
 
 .character-name {
   margin: 0;
+}
+
+button {
+  cursor: pointer;
 }

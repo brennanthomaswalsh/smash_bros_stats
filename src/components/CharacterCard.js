@@ -24,11 +24,11 @@ function CharacterCard ({stockCount, headshotSrc, characterName, removeCharacter
         <p>Stocks Remaining:</p>
         <div onClick={removeCharacterStock}> { stocks }</div>
         {deceased}
-        <div onClick={resetCharacterStock}>RESET</div>
+        <button onClick={resetCharacterStock}>RESET</button>
       </div>
-      <div className="character-switch" onClick={switchCharacter}>
+      <button className="character-switch" onClick={switchCharacter}>
         <p>Switch Character</p>
-      </div>
+      </button>
     </div>
   );
 }
