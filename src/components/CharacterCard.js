@@ -10,25 +10,25 @@ function CharacterCard ({stockCount, headshotSrc, characterName, removeCharacter
   )
   const stocksRemaining = stocks.length
   let deceased;
-
+  let switchChar = <button className="character-switch" onClick={switchCharacter}><p>Switch Character</p></button>
   if(stocksRemaining === 0){
-    deceased = <div className="Deceased">Deceased</div>
+    deceased = 'deceased'
+  }
+  if(stocksRemaining < 4){
+    switchChar = null
   }
 
   return (
-    <div className="character-card">
+    <div className={"character-card " + deceased}>
       <div className="character-head">
         <CharacterHeadshot src={headshotSrc}/>
       </div>
       <div className="stocks">
         <p>Stocks Remaining:</p>
         <div onClick={removeCharacterStock}> { stocks }</div>
-        {deceased}
         <button onClick={resetCharacterStock}>RESET</button>
       </div>
-      <button className="character-switch" onClick={switchCharacter}>
-        <p>Switch Character</p>
-      </button>
+      { switchChar }
     </div>
   );
 }

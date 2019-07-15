@@ -9,6 +9,11 @@
   width: 100%;
 }
 
+.character-card.deceased {
+  background: #D3D3D3 ;
+  border: 0.625rem solid black;
+}
+
 .stocks img {
   width: 0.9375rem;
   margin: 0.3125rem;
